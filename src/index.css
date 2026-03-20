@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Noise overlay for tactile texture */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  color: #1A1210;
+  background: #FAF7F2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Typography scale */
+.heading-xl {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.heading-lg {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.drama {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+}
+
+.mono {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Button base */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: #C4572A;
+  color: #F5F0E8;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 30px rgba(196, 87, 42, 0.3);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: #FAF7F2;
+  color: #1A1210;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.3s ease;
+}
+
+.btn-secondary:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 30px rgba(26, 18, 16, 0.15);
+}
+
+/* Link hover lift */
+a {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+a:hover {
+  transform: translateY(-1px);
+}
+
+/* Card base */
+.card {
+  background: #2D2420;
+  border-radius: 2rem;
+  border: 1px solid rgba(245, 240, 232, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(26, 18, 16, 0.2);
+}
+
+/* Image treatment for palette consistency */
+.img-treated {
+  filter: grayscale(30%) sepia(10%) hue-rotate(345deg) contrast(1.05) brightness(0.95);
+  transition: filter 0.4s ease;
+}
+
+.img-treated:hover {
+  filter: grayscale(10%) sepia(5%) contrast(1.1) brightness(1);
+}
+
+/* Section containers */
+.section-dark {
+  background: #2D2420;
+  color: #F5F0E8;
+}
+
+.section-deep {
+  background: #1A1210;
+  color: #F5F0E8;
+}
+
+.section-terra {
+  background: #C4572A;
+  color: #F5F0E8;
+}
+
+/* Visibility helper for GSAP */
+.gsap-hidden {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Blinking cursor for typewriter */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s infinite;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #2D2420;
+  border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+}
