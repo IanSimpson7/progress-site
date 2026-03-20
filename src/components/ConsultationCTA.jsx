@@ -12,7 +12,7 @@ function ConsultationForm() {
     e.preventDefault()
     const form = e.target
     try {
-      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const res = await fetch('https://formspree.io/f/xwvrznnr', {
         method: 'POST',
         body: new FormData(form),
         headers: { Accept: 'application/json' },
