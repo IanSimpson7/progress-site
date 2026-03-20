@@ -1,8 +1,75 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
+
+function ConsultationForm() {
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const form = e.target
+    try {
+      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      })
+      const text = await res.text()
+      let data
+      try { data = JSON.parse(text) } catch { data = {} }
+      if (data.ok || res.ok) {
+        setSubmitted(true)
+      } else {
+        setError(true)
+      }
+    } catch {
+      setError(true)
+    }
+  }
+
+  if (submitted) {
+    return (
+      <div className="cta-animate text-cream text-xl font-heading">
+        We'll be in touch soon.
+      </div>
+    )
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="cta-animate max-w-md mx-auto text-left space-y-4">
+      <input
+        type="text"
+        name="name"
+        placeholder="Your name"
+        required
+        className="w-full px-5 py-3 rounded-2xl bg-cream/10 border border-cream/20 text-cream placeholder-cream/40 font-body focus:outline-none focus:border-cream/50 transition-colors"
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Your email"
+        required
+        className="w-full px-5 py-3 rounded-2xl bg-cream/10 border border-cream/20 text-cream placeholder-cream/40 font-body focus:outline-none focus:border-cream/50 transition-colors"
+      />
+      <select
+        name="type"
+        required
+        className="w-full px-5 py-3 rounded-2xl bg-cream/10 border border-cream/20 text-cream font-body focus:outline-none focus:border-cream/50 transition-colors"
+      >
+        <option value="" disabled selected className="text-warm-charcoal">I'm interested in...</option>
+        <option value="transformation" className="text-warm-charcoal">Personal transformation</option>
+        <option value="trainer" className="text-warm-charcoal">Growing my training business</option>
+      </select>
+      <button type="submit" className="btn-secondary text-lg w-full justify-center">
+        Book Your Free Consultation
+      </button>
+      {error && <p className="text-cream/60 text-sm text-center">Something went wrong. Please try again.</p>}
+    </form>
+  )
+}
 
 export default function ConsultationCTA() {
   const sectionRef = useRef(null)
@@ -45,12 +112,7 @@ export default function ConsultationCTA() {
             training business — it starts with a free consultation where we
             understand your WHY.
           </p>
-          <a
-            href="mailto:ian@progressincorporated.com?subject=Consultation%20Request"
-            className="cta-animate btn-secondary text-lg no-underline"
-          >
-            Book Your Free Consultation
-          </a>
+          <ConsultationForm />
         </div>
       </section>
 
